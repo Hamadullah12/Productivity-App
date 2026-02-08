@@ -1,0 +1,46 @@
+name: project_focus
+description: A comprehensive productivity app to combat distractions and boost daily progress
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # UI & Icons
+  cupertino_icons: ^1.0.2
+  
+  # Local Storage
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  path_provider: ^2.1.1
+  
+  # Notifications
+  flutter_local_notifications: ^16.3.0
+  timezone: ^0.9.2
+  
+  # Charts & Visualization
+  fl_chart: ^0.66.0
+  
+  # Date & Time
+  intl: ^0.18.1
+  
+  # State Management
+  provider: ^6.1.1
+  
+  # File Handling
+  path: ^1.8.3
+  csv: ^6.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+
+flutter:
+  uses-material-design: true
+
