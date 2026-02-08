@@ -6,7 +6,7 @@ import '../models/daily_record.dart';
 import '../models/user_profile.dart';
 import '../models/journal_entry.dart';
 import '../services/storage_service.dart';
-import '../services/notification_service.dart';
+// import '../services/notification_service.dart'; // Temporarily disabled
 
 class AppProvider extends ChangeNotifier {
   // User Profile
@@ -165,9 +165,10 @@ class AppProvider extends ChangeNotifier {
 
     for (var task in defaultTasks) {
       await StorageService.addTask(task);
-      if (task.scheduledTime != null && _userProfile.notificationsEnabled) {
-        await NotificationService.scheduleTaskReminder(task);
-      }
+      // Notifications temporarily disabled
+      // if (task.scheduledTime != null && _userProfile.notificationsEnabled) {
+      //   await NotificationService.scheduleTaskReminder(task);
+      // }
     }
 
     _tasks = StorageService.getAllTasks();
@@ -177,9 +178,10 @@ class AppProvider extends ChangeNotifier {
   // Add task
   Future<void> addTask(Task task) async {
     await StorageService.addTask(task);
-    if (task.scheduledTime != null && _userProfile.notificationsEnabled) {
-      await NotificationService.scheduleTaskReminder(task);
-    }
+    // Notifications temporarily disabled
+    // if (task.scheduledTime != null && _userProfile.notificationsEnabled) {
+    //   await NotificationService.scheduleTaskReminder(task);
+    // }
     _tasks = StorageService.getAllTasks();
     await _updateTodayRecord();
     notifyListeners();
@@ -188,10 +190,11 @@ class AppProvider extends ChangeNotifier {
   // Update task
   Future<void> updateTask(Task task) async {
     await StorageService.updateTask(task);
-    if (task.scheduledTime != null && _userProfile.notificationsEnabled) {
-      await NotificationService.cancelNotification(task.id.hashCode);
-      await NotificationService.scheduleTaskReminder(task);
-    }
+    // Notifications temporarily disabled
+    // if (task.scheduledTime != null && _userProfile.notificationsEnabled) {
+    //   await NotificationService.cancelNotification(task.id.hashCode);
+    //   await NotificationService.scheduleTaskReminder(task);
+    // }
     _tasks = StorageService.getAllTasks();
     await _updateTodayRecord();
     notifyListeners();
@@ -208,14 +211,15 @@ class AppProvider extends ChangeNotifier {
 
       // Send motivational notification if score is improving
       final todayRecord = _getTodayRecord();
-      if (todayRecord != null &&
-          task.isCompleted &&
-          todayRecord.scorePercentage >= 70) {
-        await NotificationService.sendMotivationalNotification(
-          _userProfile.motivationalQuotes[
-              DateTime.now().millisecond % _userProfile.motivationalQuotes.length],
-        );
-      }
+      // Notifications temporarily disabled
+      // if (todayRecord != null &&
+      //     task.isCompleted &&
+      //     todayRecord.scorePercentage >= 70) {
+      //   await NotificationService.sendMotivationalNotification(
+      //     _userProfile.motivationalQuotes[
+      //         DateTime.now().millisecond % _userProfile.motivationalQuotes.length],
+      //   );
+      // }
 
       notifyListeners();
     }
@@ -224,7 +228,7 @@ class AppProvider extends ChangeNotifier {
   // Delete task
   Future<void> deleteTask(String taskId) async {
     await StorageService.deleteTask(taskId);
-    await NotificationService.cancelNotification(taskId.hashCode);
+    // await NotificationService.cancelNotification(taskId.hashCode); // Disabled
     _tasks = StorageService.getAllTasks();
     await _updateTodayRecord();
     notifyListeners();
