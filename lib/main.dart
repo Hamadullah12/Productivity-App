@@ -5,7 +5,7 @@ import 'dart:async';
 
 import 'providers/app_provider.dart';
 import 'services/storage_service.dart';
-import 'services/notification_service.dart';
+// import 'services/notification_service.dart';  // Temporarily disabled
 import 'screens/home_screen.dart';
 import 'screens/progress_screen.dart';
 import 'screens/journal_screen.dart';
@@ -24,9 +24,9 @@ void main() async {
   await Hive.openBox('user_profile');
   await Hive.openBox('journal_entries');
 
-  // Initialize notifications
-  await NotificationService.initialize();
-  await NotificationService.requestPermissions();
+  // Initialize notifications - Temporarily disabled
+  // await NotificationService.initialize();
+  // await NotificationService.requestPermissions();
 
   runApp(const MyApp());
 }
